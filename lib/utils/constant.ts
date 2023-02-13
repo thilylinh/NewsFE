@@ -1,5 +1,5 @@
-export const SERVER_BASE_URL = `https://localhost:44380/api`;
-//export const SERVER_BASE_URL = `https://api.lifenews247.com/api`;
+//export const SERVER_BASE_URL = `https://localhost:44380/api`;
+export const SERVER_BASE_URL = `https://api.lifenews247.com/api`;
 
 export const APP_NAME = `conduit`;
 

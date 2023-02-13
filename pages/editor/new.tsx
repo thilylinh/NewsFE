@@ -3,7 +3,6 @@ import React from "react";
 import useSWR from "swr";
 
 import ListErrors from "../../components/common/ListErrors";
-import TagInput from "../../components/editor/TagInput";
 import ArticleAPI from "../../lib/api/article";
 import storage from "../../lib/utils/storage";
 import editorReducer from "../../lib/utils/editorReducer";
@@ -85,12 +84,6 @@ const PublishArticleEditor = () => {
                     onChange={handleBody}
                   />
                 </fieldset>
-
-                <TagInput
-                  tagList={posting.tagList}
-                  addTag={addTag}
-                  removeTag={removeTag}
-                />
 
                 <button
                   className="btn btn-lg pull-xs-right btn-primary"

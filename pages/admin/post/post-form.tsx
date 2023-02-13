@@ -7,7 +7,7 @@ import useSWR from "swr";
 import storage from "lib/utils/storage";
 const CKeditor = dynamic(() => import("../../../components/common/Ckeditor"), { ssr: false });
 
-const PostForm = (props) => {
+const PostForm = (props: any) => {
     const [title, setTitle] = useState("")
     const [subTitle, setSubTitle] = useState("")
     const [content, setContent] = useState("")
@@ -34,7 +34,7 @@ const PostForm = (props) => {
         }
     }, [])
 
-    const getPostById = async (id) => {
+    const getPostById = async (id: any) => {
         const { data, status } = await PostApi.getPostById(id);
         if (status === 200) {
             console.log(data)
@@ -59,27 +59,27 @@ const PostForm = (props) => {
         }
     }
 
-    const titleChange = useCallback((e) => {
+    const titleChange = useCallback((e: any) => {
         setTitle(e.target.value)
     }, [])
 
-    const subTitleChange = useCallback((e) => {
+    const subTitleChange = useCallback((e: any) => {
         setSubTitle(e.target.value)
     }, [])
 
-    const subImageChange = useCallback((e) => {
+    const subImageChange = useCallback((e: any) => {
         console.log(e.target.files[0])
         setImage(e.target.files[0])
     }, [])
 
-    const handleCategoryChange = useCallback((e) => {
+    const handleCategoryChange = useCallback((e: any) => {
         console.log(e.target.value)
         if (e.target.value !== "") {
             setCatgoriId(e.target.value);
         }
     }, [])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
             let res;
@@ -140,7 +140,7 @@ const PostForm = (props) => {
                 <label>Nội dung</label>
                 <CKeditor
                     value={content}
-                    onChange={(v) => setContent(v)}
+                    onChange={(v: any) => setContent(v)}
                 />
             </div>
             <div className="form-group">
@@ -153,7 +153,7 @@ const PostForm = (props) => {
                 <label>Danh mục</label>
                 <select className="form-select" onChange={handleCategoryChange} value={categoryId}>
                     <option value="">Chọn danh mục</option>
-                    {categories && categories.map((item, index) => (
+                    {categories && categories.map((item: any, index) => (
                         <option key={index} value={item.id}>{item.name}</option>
                     ))}
                 </select>

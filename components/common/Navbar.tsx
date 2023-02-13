@@ -13,7 +13,7 @@ const Navbar = () => {
   const { data: currentUser } = useSWR("user", storage);
   const isLoggedIn = checkLogin(currentUser);
 
-  const handleClick = React.useCallback(() => setPage(0), []);
+  const handleClick = React.useCallback(() => setPage && setPage(0), []);
 
   return (
     <nav className="navbar navbar-light">

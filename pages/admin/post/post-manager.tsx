@@ -20,8 +20,8 @@ const PostManager = () => {
         }
     }
 
-    const handleDelete = async (id) => {
-
+    const handleDelete = async (id: any) => {
+        // handle after
     }
 
     return <>
@@ -46,21 +46,22 @@ const PostManager = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data && data.map((t, index) => (<tr>
-                                <th scope="row">{index + 1}</th>
-                                <td>{t.tiltle}</td>
-                                <td>{parse(t.content.length > 300 ? t.content.substring(0, 300) : t.content)}</td>
-                                <td>@mdo</td>
-                                <td>
-                                    <Link href={{
-                                        pathname: "/admin/post/edit",
-                                        query: { id: t.id },
-                                    }}>
-                                        <span className="btn btn-success">
-                                            Sửa</span></Link> &ensp;|&ensp;
-                                    <button className="btn btn-success" onClick={() => handleDelete(t.id)}>Xóa</button>
-                                </td>
-                            </tr>))}
+                            {data && data.map((t: any, index) => (
+                                <tr key={index}>
+                                    <th scope="row">{index + 1}</th>
+                                    <td>{t.tiltle}</td>
+                                    <td>{parse(t.content.length > 300 ? t.content.substring(0, 300) : t.content)}</td>
+                                    <td>@mdo</td>
+                                    <td>
+                                        <Link href={{
+                                            pathname: "/admin/post/edit",
+                                            query: { id: t.id },
+                                        }}>
+                                            <span className="btn btn-success">
+                                                Sửa</span></Link> &ensp;|&ensp;
+                                        <button className="btn btn-success" onClick={() => handleDelete(t.id)}>Xóa</button>
+                                    </td>
+                                </tr>))}
                         </tbody>
                     </table>
                     <div className="row">

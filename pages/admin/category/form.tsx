@@ -2,7 +2,7 @@ import CategoryAPI from "lib/api/category";
 import { useCallback, useEffect, useState } from "react";
 import Router from "next/router";
 
-const FormCategory = (props) => {
+const FormCategory = (props: any) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [position, setPosition] = useState("");
@@ -15,7 +15,7 @@ const FormCategory = (props) => {
         }
     }, [])
 
-    const getCategoryById = async (id) => {
+    const getCategoryById = async (id: any) => {
         const { data, status } = await CategoryAPI.getById(id);
         if (status === 200) {
             //setData(data)
@@ -28,19 +28,19 @@ const FormCategory = (props) => {
         }
     }
 
-    const handleTitleChange = useCallback((e) => {
+    const handleTitleChange = useCallback((e: any) => {
         setTitle(e.target.value)
     }, [])
 
-    const handleDescriptionChange = useCallback((e) => {
+    const handleDescriptionChange = useCallback((e: any) => {
         setDescription(e.target.value)
     }, [])
 
-    const handlePositionChange = useCallback((e) => {
+    const handlePositionChange = useCallback((e: any) => {
         setPosition(e.target.value)
     }, [])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         setLoading(true);
         let res;

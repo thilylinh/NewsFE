@@ -93,7 +93,7 @@ const ArticleList = () => {
       <div className="row">
         <div className="section-title full-width">
           <h2>Latest World News </h2>
-          <h4>Don't miss daily news</h4>
+          <h4>Do not miss daily news</h4>
         </div>
       </div>
       {news && news.map((item: any, index) => (

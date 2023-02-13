@@ -1,6 +1,6 @@
 import React from "react";
 
-const ListErrors = ({ errors }) => (
+const ListErrors = ({ errors }: any) => (
   <ul className="error-messages">
     {Object.keys(errors).map((key) => {
       return (

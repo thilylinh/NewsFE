@@ -21,11 +21,11 @@ const CategoryManager = () => {
         }
     }
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id: any) => {
         debugger
         const { data, status } = await CategoryAPI.delete(id);
         if (status == 200) {
-            setCategories(categories.filter((x) => x.id !== id));
+            setCategories(categories.filter((x: any) => x.id !== id));
         } else {
             alert("Error")
         }
@@ -52,7 +52,7 @@ const CategoryManager = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {categories && categories.map((item, index) => (
+                        {categories && categories.map((item: any, index) => (
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
                                 <th scope="row">{item.name}</th>

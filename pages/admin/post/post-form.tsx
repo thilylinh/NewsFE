@@ -18,6 +18,7 @@ const PostForm = (props: any) => {
     const [categories, setCategories] = useState([])
 
     const { data: currentUser } = useSWR("user", storage);
+    console.log(currentUser)
     let { idPost } = props;
 
     const router = useRouter()
@@ -85,11 +86,11 @@ const PostForm = (props: any) => {
             let res;
             let statusRes;
             if (id) {
-                const { data, status } = await PostApi.edit(id, title, subTitle, content, image, categoryId, 1);
+                const { data, status } = await PostApi.edit(id, title, subTitle, content, image, categoryId, currentUser.id);
                 res = data;
                 statusRes = status;
             } else {
-                const { data, status } = await PostApi.add(title, subTitle, content, image, categoryId, 1);
+                const { data, status } = await PostApi.add(title, subTitle, content, image, categoryId, currentUser.id);
                 res = data;
                 statusRes = status;
             }
@@ -111,9 +112,7 @@ const PostForm = (props: any) => {
         if (content !== "" && content != null) {
             let contentTemp = content;
             let indexImg = contentTemp.indexOf("<iframe");
-            debugger
             while (indexImg > -1) {
-                debugger
                 let chuoiDau = contentTemp.substring(0, indexImg);
                 let indexCuoiImg = contentTemp.indexOf("/iframe>", indexImg + 1);
                 //
@@ -121,8 +120,10 @@ const PostForm = (props: any) => {
                 contentTemp = chuoiDau + chuoiCuoi;
                 indexImg = contentTemp.indexOf("<iframe");
             }
-            console.log("contentTemp", contentTemp)
+            
+            //console.log("contentTemp", contentTemp)
             setContent(contentTemp);
+            alert("Xong");
         }
     }
 
@@ -132,24 +133,24 @@ const PostForm = (props: any) => {
                 <label htmlFor="exampleInputEmail1">Tiêu đề</label>
                 <input type="text" className="form-control" placeholder="Tiêu đề" value={title} onChange={titleChange} />
             </div>
-            <div className="form-group">
+            <div className="form-group mt-3">
                 <label htmlFor="exampleInputEmail1">Phụ đề</label>
                 <input type="text" className="form-control" placeholder="Phụ đề" value={subTitle} onChange={subTitleChange} />
             </div>
-            <div className="form-group">
+            <div className="form-group mt-3">
                 <label>Nội dung</label>
                 <CKeditor
                     value={content}
                     onChange={(v: any) => setContent(v)}
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group mt-3">
                 <label>Ảnh</label>
-                <input type="file" className="form-control" onChange={subImageChange} />
+                <input type="file" className="form-control" onChange={subImageChange} accept="image/*"/>
 
                 {(image || imageDisplay) && <img className="image-pre" src={image ? URL.createObjectURL(image) : imageDisplay} />}
             </div>
-            <div className="form-group">
+            <div className="form-group mt-3">
                 <label>Danh mục</label>
                 <select className="form-select" onChange={handleCategoryChange} value={categoryId}>
                     <option value="">Chọn danh mục</option>
@@ -158,7 +159,7 @@ const PostForm = (props: any) => {
                     ))}
                 </select>
             </div>
-            <button type="submit" className="btn btn-primary" disabled={isLoading}>{id ? "Cập nhật" : "Tạo mới"}</button>
+            <button type="submit" className="btn btn-primary mt-3" disabled={isLoading}>{id ? "Cập nhật" : "Tạo mới"}</button>
         </form>
         <div className="row mt-3">
             <div className="col-md-3">

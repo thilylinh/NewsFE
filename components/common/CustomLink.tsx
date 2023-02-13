@@ -9,8 +9,8 @@ interface CustomLinkProps {
 }
 
 const CustomLink = ({ className, href, as, children }: CustomLinkProps) => (
-  <Link href={href} as={as} passHref>
-    <span className={className || ""}>{children}</span>
+  <Link href={href} as={as} passHref className="">
+    {children}
   </Link>
 );
 

@@ -46,7 +46,7 @@ const LoginForm = () => {
 
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <fieldset className="form-group">
+          <fieldset className="form-group mt-3">
             <input
               className="form-control form-control-lg"
               type="text"
@@ -56,7 +56,7 @@ const LoginForm = () => {
             />
           </fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className="form-group mt-3">
             <input
               className="form-control form-control-lg"
               type="password"
@@ -67,7 +67,7 @@ const LoginForm = () => {
           </fieldset>
 
           <button
-            className="btn btn-lg btn-primary pull-xs-right"
+            className="btn btn-lg btn-primary pull-xs-right mt-3"
             type="submit"
             disabled={isLoading}
           >

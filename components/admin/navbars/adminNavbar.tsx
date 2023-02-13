@@ -1,9 +1,8 @@
-import CustomLink from "components/common/CustomLink";
-import Maybe from "components/common/Maybe";
 import NavLink from "components/common/NavLink";
 import { usePageDispatch } from "lib/context/PageContext";
 import checkLogin from "lib/utils/checkLogin";
 import storage from "lib/utils/storage";
+import Link from "next/link";
 import { useCallback } from "react";
 import useSWR from "swr";
 
@@ -15,63 +14,55 @@ const AdminNavbar = (props: any) => {
 
   const handleClick = useCallback(() => setPage && setPage(0), []);
 
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("user");
+  }, [])
+
   return (
     <>
-      <div className="navbar navbar-light">
-        <div className="container navbar-custom">
-          <CustomLink className="navbar-brand" href="/admin/dashboard" as="/admin/dashboard">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+          <Link className="navbar-brand" href="/admin/dashboard" as="/admin/dashboard">
             <span onClick={handleClick}>{brandText}</span>
-          </CustomLink>
-          <ul className="nav navbar-nav pull-xs-right horizontal">
-            <li className="nav-item">
-              <NavLink href="/admin/post/post-manager" as="/admin/post/post-manager">
-                <i className="ion-compose" />
-                &nbsp;New Post
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink href="/admin/category/category-manager" as="/admin/category/category-manager">
-                <i className="ion-navicon" />
-                &nbsp; Danh mục
-              </NavLink>
-            </li>
-            <Maybe test={isLoggedIn}>
+          </Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink href="/" as="/">
-                  <span onClick={handleClick}>Home</span>
+                <NavLink href="/admin/dashboard" as="/admin/dashboard">
+                  Dashboard
                 </NavLink>
               </li>
-
-              <li className="nav-item">
-                <NavLink href="/user/settings" as="/user/settings">
-                  <i className="ion-gear-a" />
-                  &nbsp;Settings
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  href={`/profile/${currentUser?.username}`}
-                  as={`/profile/${currentUser?.username}`}
-                >
-                  <span onClick={handleClick}>{currentUser?.username}</span>
-                </NavLink>
-              </li>
-            </Maybe>
-            <Maybe test={!isLoggedIn}>
-              <li className="nav-item">
+              {isLoggedIn &&
+                <>
+                  <li className="nav-item">
+                    <NavLink href="/admin/post/post-manager" as="/admin/post/post-manager">
+                      Bài đăng
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink href="/admin/category/category-manager" as="/admin/category/category-manager">
+                      Danh mục
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <span className="nav-link user-name"> {currentUser?.name}</span>
+                  </li>
+                  <li className="nav-item">
+                    <button className="nav-link btn btn-danger" onClick={handleLogout}>Đăng xuất</button>
+                  </li>
+                </>}
+              {!isLoggedIn && <>
                 <NavLink href="/admin/user/login" as="/admin/user/login">
                   Đăng nhập
                 </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink href="/user/register" as="/user/register">
-                  Sign up
-                </NavLink>
-              </li>
-            </Maybe>
-          </ul>
+              </>}
+            </ul>
+          </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 };

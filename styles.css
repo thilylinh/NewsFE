@@ -1,3 +1,6 @@
+a span {
+  text-decoration: none;
+}
 .logo-font {
   font-family: titillium web, sans-serif;
 }
@@ -50,7 +53,11 @@ img.lazyload:not([src]) {
   flex-direction: row !important;
 }
 
-.navbar-custom{
+.navbar-custom {
   padding: 1rem;
   border-bottom: 1px solid rgba(123, 123, 123, 0.404);
+}
+.user-name {
+  margin-left: 30px;
+  color: rgb(255, 183, 0) !important;
 }

@@ -1,20 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-
-import ArticlePreview from "./ArticlePreview";
-import ErrorMessage from "../common/ErrorMessage";
-import LoadingSpinner from "../common/LoadingSpinner";
-import Maybe from "../common/Maybe";
-import Pagination from "../common/Pagination";
 import { usePageState } from "../../lib/context/PageContext";
 import {
   usePageCountState,
   usePageCountDispatch,
 } from "../../lib/context/PageCountContext";
 import useViewport from "../../lib/hooks/useViewport";
-import { SERVER_BASE_URL, DEFAULT_LIMIT } from "../../lib/utils/constant";
-import fetcher from "../../lib/utils/fetcher";
+// import { SERVER_BASE_URL, DEFAULT_LIMIT } from "../../lib/utils/constant";
+// import fetcher from "../../lib/utils/fetcher";
 import PostApi from "lib/api/post.api";
 import parse from 'html-react-parser';
 import Link from "next/link";
@@ -23,18 +16,18 @@ const ArticleList = () => {
   const [news, setNews] = useState([])
   const page = usePageState();
   const pageCount = usePageCountState();
-  const setPageCount = usePageCountDispatch();
-  const lastIndex =
-    pageCount > 480 ? Math.ceil(pageCount / 20) : Math.ceil(pageCount / 20) - 1;
+  // const setPageCount = usePageCountDispatch();
+  // const lastIndex =
+  //   pageCount > 480 ? Math.ceil(pageCount / 20) : Math.ceil(pageCount / 20) - 1;
 
   const { vw } = useViewport();
   const router = useRouter();
   const { asPath, pathname, query } = router;
-  const { favorite, follow, tag, pid } = query;
+  // const { favorite, follow, tag, pid } = query;
 
-  const isProfilePage = pathname.startsWith(`/profile`);
+  // const isProfilePage = pathname.startsWith(`/profile`);
 
-  let fetchURL = `${SERVER_BASE_URL}/articles?offset=${page * DEFAULT_LIMIT}`;
+  // let fetchURL = `${SERVER_BASE_URL}/articles?offset=${page * DEFAULT_LIMIT}`;
 
   // switch (true) {
   //   case !!tag:
@@ -103,7 +96,7 @@ const ArticleList = () => {
           <h4>Don't miss daily news</h4>
         </div>
       </div>
-      {news && news.map((item, index) => (
+      {news && news.map((item: any, index) => (
         <div className="row" key={index}>
           <div className="list-post fl-wrap">
             <div className="col-md-3">
@@ -124,7 +117,9 @@ const ArticleList = () => {
                 <p> {parse(item.content.length > 300 ? item.content.substring(0, 300) : item.content)}...</p>
                 <ul className="post-opt">
                   <li><i className="ion-chatbox" /> 3 </li>
-                  <li><i className="ion-eye" /> 431 views </li></ul><div className="author-link">
+                  <li><i className="ion-eye" /> 431 views </li>
+                </ul>
+                <div className="author-link">
                   <a href="https://webredox.net/demo/wp/gmag/author/webredox/">
                     <img decoding="async" loading="lazy" src="https://webredox.net/demo/wp/gmag/wp-content/uploads/2022/06/3.jpg" width={36} height={36} alt="Ann Kowalsky" className="avatar avatar-36 wp-user-avatar wp-user-avatar-36 alignnone photo" />
                     <span>{item.userName}</span>

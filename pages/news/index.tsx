@@ -1,20 +1,11 @@
 import Client from "layouts/client";
 import PostApi from "lib/api/post.api";
-import marked from "marked";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-
-import ArticleMeta from "../../components/article/ArticleMeta";
-import CommentList from "../../components/comment/CommentList";
-import ArticleAPI from "../../lib/api/article";
-import { Article } from "../../lib/types/articleType";
-import { SERVER_BASE_URL } from "../../lib/utils/constant";
-import fetcher from "../../lib/utils/fetcher";
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 
 
-const NewsDetails = (initialArticle) => {
+const NewsDetails = (initialArticle: any) => {
   const [title, setTitle] = useState("")
   const [subTitle, setSubTitle] = useState("")
   const [content, setContent] = useState("")
@@ -30,7 +21,7 @@ const NewsDetails = (initialArticle) => {
     getNewsById(id);
   })
 
-  const getNewsById = async (id) => {
+  const getNewsById = async (id: any) => {
     const { data, status } = await PostApi.getForClientById(id);
     if (status == 200 && data) {
       setTitle(data.tittle)
@@ -78,7 +69,7 @@ const NewsDetails = (initialArticle) => {
                   </div>
                   <div className="clearfix" />
                   <div className="single-post-content_text" id="font_chage">
-                    {ReactHtmlParser(content)}
+                    {parse(content)}
                   </div>
                   {/* <div className="single-post-nav fl-wrap">
                     <a href="https://webredox.net/demo/wp/gmag/innovations-that-bring-pleasure-to-all-peoples/" className="single-post-nav_prev spn_box">

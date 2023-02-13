@@ -7,13 +7,13 @@ import storage from "lib/utils/storage";
 import { useCallback } from "react";
 import useSWR from "swr";
 
-const AdminNavbar = (props) => {
+const AdminNavbar = (props: any) => {
   let { brandText } = props;
   const setPage = usePageDispatch();
   const { data: currentUser } = useSWR("user", storage);
   const isLoggedIn = checkLogin(currentUser);
 
-  const handleClick = useCallback(() => setPage(0), []);
+  const handleClick = useCallback(() => setPage && setPage(0), []);
 
   return (
     <>

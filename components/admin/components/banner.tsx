@@ -1,4 +1,4 @@
-const Banner = (props) => {
+const Banner = (props: any) => {
     let { title, subTitle } = props;
     return <div className="banner">
         <div className="container">
